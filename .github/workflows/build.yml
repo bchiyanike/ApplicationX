@@ -1,0 +1,38 @@
+name: Alpha Player CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: Build Debug APK
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Build APK
+      run: |
+        chmod +x gradlew
+        ./gradlew assembleDebug --stacktrace
+
+    - name: Upload APK
+      uses: actions/upload-artifact@v3
+      with:
+        name: alpha-player-debug
+        path: app/build/outputs/apk/debug/app-debug.apk
+        retention-days: 5
+
+    - name: Verify APK
+      run: |
+        file app/build/outputs/apk/debug/app-debug.apk | grep 'Zip archive'
