@@ -1,0 +1,20 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Your existing color scheme -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <!-- Add these lines to fix drawerLayoutStyle errors -->
+        <item name="drawerLayoutStyle">@style/Widget.AppCompat.DrawerLayout</item>
+        <item name="android:drawerLayoutStyle">@style/Widget.AppCompat.DrawerLayout</item>
+    </style>
+
+    <!-- Add this style definition -->
+    <style name="Widget.AppCompat.DrawerLayout" parent="">
+        <!-- Basic drawer layout styling -->
+        <item name="android:layout_gravity">start</item>
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+</resources>
