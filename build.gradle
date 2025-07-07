@@ -1,0 +1,45 @@
+buildscript {
+    ext {
+        build_gradle_version = '7.0.2'
+        kotlin_version = '1.9.22'
+        room_version = '2.6.1' // For future Room DB
+    }
+
+    repositories {
+        // Primary: Local offline repo
+        maven { 
+            url 'file:///storage/emulated/0/my-local-repo'
+            allowInsecureProtocol = true // For file://
+        }
+        
+        // Fallback: Remote mirrors
+        maven { url 'https://maven.aliyun.com/repository/public/' }
+        maven { url 'https://maven.aliyun.com/repository/google/' }
+        google()
+        mavenCentral()
+    }
+    
+    dependencies {
+        classpath "com.android.tools.build:gradle:$build_gradle_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+allprojects {
+    repositories {
+        // Local repo (must be first)
+        maven { 
+            url 'file:///storage/emulated/0/my-local-repo'
+            metadataSources { artifact() } // Faster resolution
+        }
+        
+        // Remote repos
+        maven { url 'https://jitpack.io' }
+        google()
+        mavenCentral()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
