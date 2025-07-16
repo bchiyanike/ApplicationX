@@ -35,5 +35,4 @@ jobs:
 
     - name: Verify APK
       run: |
-        file app/build/outputs/apk/debug/app-debug.apk | grep 'Zip archive'     run: |
         file app/build/outputs/apk/debug/app-debug.apk | grep 'Zip archive'
